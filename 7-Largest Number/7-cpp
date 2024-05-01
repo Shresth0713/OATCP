@@ -1,0 +1,38 @@
+class NumberSolution {
+public:
+    string generateLargestNumber(vector<int>& values) {
+        int size = values.size();
+        vector<string> strings;
+        for(int index = 0; index < size; index++){
+            string converted = to_string(values[index]);
+            strings.push_back(converted);
+        }
+        
+        long long totalSum = 0;
+        for(int index = 0; index < size; index++){
+            totalSum += values[index];
+        }
+        
+        if(totalSum == 0){
+            return "0";
+        }
+        else{
+            sort(strings.begin(), strings.end(), compareStrings);
+            string result = "";
+            for(int index = 0; index < size; index++){
+                result += strings[index];
+            }
+            return result;
+        }
+    }
+
+private:
+    static bool compareStrings(string first, string second){
+        if(first + second > second + first){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+};
